@@ -1,4 +1,4 @@
-ARG BASE_IMAGE
+ARG BASE_IMAGE=ros:humble-ros-base-jammy
 
 FROM $BASE_IMAGE 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
