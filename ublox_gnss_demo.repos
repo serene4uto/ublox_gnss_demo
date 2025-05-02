@@ -1,4 +1,8 @@
 repositories:
+  ublox_gnss_demo_launch:
+    type: git
+    url: https://github.com/serene4uto/ublox_gnss_demo_launch.git
+    version: main
   ublox_gnss_ros:
     type: git
     url: https://github.com/serene4uto/ublox_gnss_ros.git
