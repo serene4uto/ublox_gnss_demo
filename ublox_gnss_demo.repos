@@ -1,0 +1,15 @@
+repositories:
+  ublox_gnss_ros:
+    type: git
+    url: https://github.com/serene4uto/ublox_gnss_ros.git
+    version: main
+  ntrip_client_ros:
+    type: git
+    url: https://github.com/serene4uto/ntrip_client_ros.git
+    version: main
+  gnss_eval_ros:
+    type: git
+    url: https://github.com/serene4uto/gnss_eval_ros.git
+    version: main
+
+
