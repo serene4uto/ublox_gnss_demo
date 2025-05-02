@@ -7,6 +7,7 @@
   // "remoteUser": "ubox_gnss_demo",
   "runArgs": [
       "-it",
+      "--name=ublox_gnss_demo",
       "--privileged",
       "--cap-add=SYS_PTRACE",
       "--security-opt",

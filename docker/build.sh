@@ -87,9 +87,15 @@ build_images() {
         "$WORKSPACE_ROOT"
 }
 
+# Remove dangling images
+remove_dangling_images() {
+    docker image prune -f
+}
+
 # Main script execution
 parse_arguments "$@"
 set_platform
 load_env
 clone_repositories
 build_images
+remove_dangling_images
