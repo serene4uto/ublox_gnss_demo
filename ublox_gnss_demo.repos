@@ -11,7 +11,7 @@ repositories:
     type: git
     url: https://github.com/serene4uto/ntrip_client_ros.git
     version: main
-  gnss_utils_ros
+  gnss_utils_ros:
     type: git
     url: https://github.com/serene4uto/gnss_utils_ros.git
     version: main
