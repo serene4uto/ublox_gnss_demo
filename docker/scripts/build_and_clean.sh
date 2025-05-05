@@ -7,10 +7,11 @@ function build_and_clean() {
     local colcon_build_args=$3
 
     # shellcheck disable=SC2086
-    du -sh "$ccache_dir" && ccache -s &&
+    du -sh "$ccache_dir" && ccache -s && 
         colcon build --cmake-args \
             " -Wno-dev" \
             " --no-warn-unused-cli" \
+            --executor sequential \
             --merge-install \
             --install-base "$install_base" \
             --mixin release compile-commands ccache \

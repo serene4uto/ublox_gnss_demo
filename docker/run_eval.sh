@@ -9,6 +9,7 @@ DOCKER_IMAGE="ghcr.io/serene4uto/ublox_gnss_demo:latest"
 option_log_path=""
 option_gt_lat=""
 option_gt_lon=""
+option_pull="no"  # Default: do not pull
 
 # Function to print help message
 print_help() {
@@ -19,6 +20,7 @@ print_help() {
     echo "  --log-path      Specify the log path (default: /tmp/ublox_gnss_eval_logs)"
     echo "  --gt-lat        Specify the ground truth latitude"
     echo "  --gt-lon        Specify the ground truth longitude"
+    echo "  --pull          Pull the Docker image before running"
 }
 
 # Parse command line arguments
@@ -41,6 +43,9 @@ parse_arguments() {
             shift
             option_gt_lon="$1"
             ;;
+        --pull)
+            option_pull="yes"
+            ;;
         *)
             echo "Unknown option: $1"
             print_help
@@ -51,8 +56,6 @@ parse_arguments() {
     done
 }
 
-
-# Main script execution
 main() {
     # Parse arguments
     parse_arguments "$@"
@@ -68,20 +71,22 @@ main() {
         option_log_path="/tmp/ublox_gnss_eval_logs"
     fi
 
-    # print the parsed arguments
     echo "Parsed arguments:"
     echo "  Log path: $option_log_path"
     echo "  Ground truth latitude: $option_gt_lat"
     echo "  Ground truth longitude: $option_gt_lon"
+    echo "  Pull docker image: $option_pull"
 
-    # create a directory for logs
     mkdir -p ${option_log_path}
 
-    # Pull the latest Docker image
-    echo "Pulling the latest Docker image: ${DOCKER_IMAGE}"
-    docker pull ${DOCKER_IMAGE}
+    # Only pull if --pull is specified
+    if [ "$option_pull" = "yes" ]; then
+        echo "Pulling the latest Docker image: ${DOCKER_IMAGE}"
+        docker pull ${DOCKER_IMAGE}
+    else
+        echo "Skipping docker pull."
+    fi
 
-    # launch the evaluation node
     set -x
     docker run \
         --rm \
@@ -105,6 +110,5 @@ main() {
                 --remap /fix:=/ublox/fix \
             "
 }
-
 
 main "$@"
