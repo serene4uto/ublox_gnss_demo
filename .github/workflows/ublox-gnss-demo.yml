@@ -26,11 +26,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Make build.sh executable
-        run: chmod +x ./build.sh
+        run: chmod +x ./docker/build.sh
 
       - name: Build and push amd64
         run: |
-          ./build.sh
+          ./docker/build.sh
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
   build-and-push-arm64:
@@ -53,9 +53,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Make build.sh executable
-        run: chmod +x ./build.sh
+        run: chmod +x ./docker/build.sh
 
       - name: Build and push arm64
         run: |
-          ./build.sh --platform linux/arm64
+          ./docker/build.sh --platform linux/arm64
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm64
