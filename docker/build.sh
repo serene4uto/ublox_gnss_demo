@@ -60,7 +60,9 @@ install_packages() {
     sudo apt-get update
     sudo apt-get install -y \
         git \
-        python3-vcstool
+        python3 \
+        python3-pip 
+    pip install vcstool
 }
 
 # Clone repositories
