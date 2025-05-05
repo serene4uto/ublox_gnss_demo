@@ -57,11 +57,13 @@ load_env() {
 
 # Install necessary packages
 install_packages() {
+    export PATH="$HOME/.local/bin:$PATH"
     sudo apt-get update
     sudo apt-get install -y \
         git \
         python3 \
-        python3-pip 
+        python3-pip \
+        docker-buildx-plugin
     pip install vcstool
 }
 
