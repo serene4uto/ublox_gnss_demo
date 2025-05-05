@@ -3,6 +3,8 @@
 SCRIPT_DIR=$(readlink -f "$(dirname "$0")")
 WORKSPACE_ROOT="$SCRIPT_DIR/.."
 
+DOCKER_IMAGE="ghcr.io/serene4uto/ublox_gnss_demo:latest"
+
 # Default values
 option_log_path=""
 option_gt_lat=""
@@ -75,6 +77,10 @@ main() {
     # create a directory for logs
     mkdir -p ${option_log_path}
 
+    # Pull the latest Docker image
+    echo "Pulling the latest Docker image: ${DOCKER_IMAGE}"
+    docker pull ${DOCKER_IMAGE}
+
     # launch the evaluation node
     set -x
     docker run \
@@ -86,7 +92,7 @@ main() {
         -v /dev/shm:/dev/shm \
         -v /etc/localtime:/etc/localtime:ro \
         -v ${option_log_path}:/tmp/ublox_gnss_eval_logs \
-        ghcr.io/serene4uto/ublox_gnss_demo:latest \
+        ${DOCKER_IMAGE} \
         /bin/bash -c " \
             source /opt/ros/humble/setup.bash \
             && source /opt/ublox_gnss_demo/setup.bash \
