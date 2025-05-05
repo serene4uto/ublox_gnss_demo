@@ -55,6 +55,14 @@ load_env() {
     source "$WORKSPACE_ROOT/default.env"
 }
 
+# Install necessary packages
+install_packages() {
+    sudo apt-get update
+    sudo apt-get install -y \
+        git \
+        python3-vcstool
+}
+
 # Clone repositories
 clone_repositories() {
     cd "$WORKSPACE_ROOT"
@@ -96,6 +104,7 @@ remove_dangling_images() {
 parse_arguments "$@"
 set_platform
 load_env
+install_packages
 clone_repositories
 build_images
 remove_dangling_images
